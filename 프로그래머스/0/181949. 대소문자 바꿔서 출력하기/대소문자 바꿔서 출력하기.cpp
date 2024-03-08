@@ -7,12 +7,14 @@ int main(void) {
 
     string str;
     cin >> str;
-    
-    for(char ch : str){
-        if(isupper(ch)) 
-            cout << (char)tolower(ch);
-        else 
-            cout << (char)toupper(ch);
+
+    for (auto c : str)
+    {
+        if ('a' <= c && c <= 'z')
+            c -= 'a' - 'A';
+        else
+            c += 'a' - 'A';
+        cout << c;
     }
     return 0;
 }

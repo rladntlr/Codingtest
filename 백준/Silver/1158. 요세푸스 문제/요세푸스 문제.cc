@@ -1,30 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
+int main(void){
     ios::sync_with_stdio(0);
     cin.tie(0);
+
     int n,k;
     cin >> n >> k;
-    list<int> N={};
-    for(int i = 1; i <= n;i++)
-        N.push_back(i);
-    auto cursor = N.begin();
-
+    list<int> l;
+    for(int i = 1; i <= n; i++) l.push_back(i);
+    auto cursor = l.begin();
     cout << '<';
-    while (!N.empty()) {
-        for (int i = 1; i < k; i++) {
+    while(!l.empty()){
+        for(int i = 1; i < k; i++){
             cursor++;
-            if (cursor == N.end()) {
-                cursor = N.begin();
-            }
+            if(cursor==l.end())cursor = l.begin();
         }
-        if(N.size()==1) cout << *cursor;
+        if(l.size()==1) cout << *cursor;
         else cout << *cursor << ", ";
-        cursor = N.erase(cursor);
-        if (cursor == N.end()) {
-            cursor = N.begin();
-        }
+        cursor = l.erase(cursor);
+        if (cursor == l.end() && !l.empty()) cursor = l.begin();
     }
-    cout << '>';
+    cout << ">";
 }

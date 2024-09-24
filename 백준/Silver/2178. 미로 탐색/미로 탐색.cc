@@ -17,7 +17,7 @@ int main() {
     for(int i = 0; i < n; i++) fill(dist[i],dist[i]+m, -1);
     queue<pair<int, int>> Q;
     Q.push({0,0});
-    dist[0][0] = 0;
+    dist[0][0] = 1;
     while (!Q.empty()){
         auto cur = Q.front();
         Q.pop();
@@ -30,5 +30,5 @@ int main() {
             Q.push({nx,ny});
         }
     }
-    cout << dist[n-1][m-1]+1;
+    cout << dist[n-1][m-1];
 }

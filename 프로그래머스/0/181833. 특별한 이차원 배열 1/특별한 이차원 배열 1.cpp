@@ -9,8 +9,6 @@ vector<vector<int>> solution(int n) {
         for(int j = 0; j < n; j++){
             if(i==j)
                 answer[i][j] = 1;
-            else
-                answer[i][j] = 0;
         }
     }
     return answer;

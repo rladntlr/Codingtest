@@ -1,28 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int a[9];
-
-int main() {
+vector<int> v;
+int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
 
+    int tall[10];
     int sum = 0;
-    for(int i=0;i<9;i++){
-        cin >> a[i];
-        sum += a[i];
+    for (int i = 0; i < 9;i++){
+        cin >> tall[i];
+        sum += tall[i]; // 전체 합
     }
-
-    sort(a,a+9);
-    for(int i=0;i<9;i++){
-        for(int j=i+1;j<9;j++){
-            if(sum - a[i] - a[j]==100){
-                for(int k=0;k<9;k++){
-                    if(i==k||j==k) continue;
-                    cout << a[k] << '\n';
+    sort(tall, tall + 9); // 미리 정렬
+    for (int i = 0; i < 8; i++){
+        for (int j = i + 1; j < 9;j++){
+            if(sum-(tall[i]+tall[j]) == 100){
+                // 2명을 뺀 값의 합이 100이 되면
+                for (int z = 0; z < 9;z++){
+                    if(z != i  && z != j){ // 2명 빼고 출력
+                        cout << tall[z] << '\n';
+                    }
                 }
                 return 0;
             }
         }
     }
+    return 0;
 }

@@ -1,19 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 vector<int> v;
+
 int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    int a, b, cnt = 0;
+    long long a, b;
     cin >> a >> b;
-    if(a>b) swap(a, b);
-    for(int i = a + 1; i < b; i++){
-        cnt++;
-        v.push_back(i);
-    }
-    cout << cnt << '\n';
-    for(auto k : v){
-        cout << k << ' ';
+    if (a > b) swap(a,b);
+    if (a == b || b - a == 1) cout << 0;
+    else {
+        cout << b - a - 1 << "\n";
+        for(long long i = a+1; i < b; i++)
+            cout << i << " ";
     }
 }

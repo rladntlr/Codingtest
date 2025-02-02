@@ -1,29 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> v;
-int main(void) {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
 
-    int tall[10];
-    int sum = 0;
-    for (int i = 0; i < 9;i++){
-        cin >> tall[i];
-        sum += tall[i]; // 전체 합
+int a[9];
+int main(){
+    cin.tie(0);
+    ios::sync_with_stdio(0);
+
+    for(int i = 0 ; i < 9; i++){
+        cin >> a[i];
     }
-    sort(tall, tall + 9); // 미리 정렬
-    for (int i = 0; i < 8; i++){
-        for (int j = i + 1; j < 9;j++){
-            if(sum-(tall[i]+tall[j]) == 100){
-                // 2명을 뺀 값의 합이 100이 되면
-                for (int z = 0; z < 9;z++){
-                    if(z != i  && z != j){ // 2명 빼고 출력
-                        cout << tall[z] << '\n';
-                    }
-                }
-                return 0;
-            }
-        }
+    sort(a, a+9);//순열을 사용할때는 무조건 정렬하고
+    do{
+        int sum = 0;
+        for(int i = 0 ; i < 7; i++) sum += a[i];
+        if(sum == 100) break;//sum이 100 되면 while탈출
+    } while (next_permutation(a, a+9));
+    for(int i = 0; i < 7; i++){
+        cout << a[i] << "\n";
     }
     return 0;
 }

@@ -1,18 +1,18 @@
+//
+// Created by 김우식 on 25. 6. 8.
+//
 #include <bits/stdc++.h>
+
 using namespace std;
 
-int cnt[103];
 int main(){
-    cin.tie(0);
-    ios::sync_with_stdio(0);
+    string s, s1;
+    cin >> s;
+    s1 = s;
+    reverse(s.begin(), s.end());
 
-    string str;
-    cin >> str;
-    string rev = str;
-    reverse(rev.begin(), rev.end());
-
-    if(rev == str) cout << 1;
-    else cout << 0;
+    if(s == s1) cout << 1 << '\n';
+    else cout << 0 << '\n';
 
     return 0;
 }

@@ -1,23 +1,21 @@
+//
+// Created by 김우식 on 25. 6. 9.
+//
 #include <bits/stdc++.h>
+
 using namespace std;
-
-int cnt[26];
+int lastname[26], n;
+string s, ans;
 int main(){
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-
-    int num;
-    string name, entry;
-
-    cin >> num;
-
-    for(int i = 0 ; i < num ; i++){
-        cin >> name;
-        cnt[name[0] - 'a']++;
+    cin >> n;
+    for(int i = 0; i < n; i++) {
+        cin >> s;
+        lastname[s[0] - 'a']++;
     }
-    for(int i = 0; i < 26; i++) if(cnt[i] >= 5) entry += i + 'a';
-    if(entry.size()) cout << entry;
+    for(int i = 0 ; i < 26; i++){
+        if(lastname[i] >= 5)
+            ans += i + 'a';
+    }
+    if(ans.size()) cout << ans << '\n';
     else cout << "PREDAJA";
-
-    return 0;
 }

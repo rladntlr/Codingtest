@@ -1,24 +1,25 @@
-#include<bits/stdc++.h>
+//
+// Created by 김우식 on 25. 6. 10.
+//
+#include <bits/stdc++.h>
+
 using namespace std;
-
-int n, t;
-string a, b;
+int t, n;
+string s1, s2;
 int main(){
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-
     cin >> t;
     while(t--){
         map<string, int> mp;
         cin >> n;
         for(int i = 0; i < n; i++){
-            cin >> a >> b;
-            mp[b]++;
+            cin >> s1 >> s2;
+            mp[s2]++;
         }
-        long long ret = 1;
-        for(auto c : mp) ret *= ((long long)c.second + 1); // int값들을 순회하면서 곱해
-        ret--; // 마지막에 -1을 해주면 모두 안입은 경우를 뺄 수 있음
-        cout << ret << "\n";
+        long long ans = 1;
+        for(auto i : mp)
+            ans *= ((long long)i.second + 1);
+        ans--;
+        cout << ans << "\n";
     }
     return 0;
 }

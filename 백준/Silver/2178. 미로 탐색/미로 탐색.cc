@@ -1,34 +1,33 @@
+//
+// Created by 김우식 on 25. 6. 18.
+//
 #include <bits/stdc++.h>
+
 using namespace std;
-#define X first
-#define Y second
-string board[100];
-int dist[100][100];
-int n,m;
-int dx[4] = {1, 0, -1, 0};
-int dy[4] = {0, 1, 0, -1};
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-
-    cin >> n >> m;
-    for(int i = 0; i<n; i++) cin >> board[i];
-
-    for(int i = 0; i < n; i++) fill(dist[i],dist[i]+m, -1);
-    queue<pair<int, int>> Q;
-    Q.push({0,0});
-    dist[0][0] = 1;
-    while (!Q.empty()){
-        auto cur = Q.front();
-        Q.pop();
-        for(int dir = 0 ; dir < 4; dir++){
-            int nx = cur.X + dx[dir];
-            int ny = cur.Y + dy[dir];
-            if(nx < 0 || nx>= n || ny < 0 || ny >=m) continue;
-            if(dist[nx][ny] >=0 || board[nx][ny] != '1') continue;
-            dist[nx][ny] = dist[cur.X][cur.Y] +1;
-            Q.push({nx,ny});
+int n, m, a[102][102], visited[102][102], y, x;
+int dy[4] = {-1, 0, 1, 0};
+int dx[4] = {0, -1, 0, 1};
+int main(){
+    scanf("%d %d", &n, &m);
+    for(int i = 0; i < n; i++){
+        for(int j = 0;j < m; j++)
+            scanf("%1d", &a[i][j]);
+    }
+    queue<pair<int, int>> q;
+    visited[0][0] = 1;
+    q.push({0,0});
+    while (q.size()){
+        tie(y, x) = q.front();
+        q.pop();
+        for(int i = 0; i < 4; i++){
+            int ny = y + dy[i];
+            int nx = x + dx[i];
+            if(ny < 0 || ny >= n || nx < 0 || nx >= m || a[ny][nx] == 0) continue;
+            if(visited[ny][nx]) continue;
+            visited[ny][nx] = visited[y][x] + 1;
+            q.push({ny, nx});
         }
     }
-    cout << dist[n-1][m-1];
+    printf("%d", visited[n - 1][m - 1]);
+    return 0;
 }

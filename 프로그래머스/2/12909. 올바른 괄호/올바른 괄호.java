@@ -4,15 +4,23 @@ import java.io.*;
 
 class Solution {
     boolean solution(String s) {
-        Deque<Character> st = new ArrayDeque<>();
-        
-        char[] a = s.toCharArray();
-        for(char c : a){
-            if(c == '(') st.push(c);
-            else{
-                if(st.isEmpty() || st.pop() == c) return false;
+        boolean answer = false;
+        int cnt = 0;
+        for(int i = 0; i<s.length();i++){
+            if(s.charAt(i) == '('){
+                cnt++;
+            }
+            if(s.charAt(i) == ')'){
+                cnt--;
+            }
+            if(cnt < 0){
+                break;
             }
         }
-        return st.isEmpty();
+        if(cnt == 0){
+            answer = true;
+        }
+
+        return answer;
     }
 }

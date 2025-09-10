@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
@@ -15,12 +13,12 @@ public class Main {
         r = Integer.parseInt(st.nextToken());
         c = Integer.parseInt(st.nextToken());
 
-        n = 1 << n;  // 2^n으로 초기화
+        n = 2 << n;  // 2^n으로 초기화
 
         int x = 0, y = 0;
 
         while (n > 1) {
-            n /= 2;  // 절반으로 줄임
+            n /= 2;
 
             // 왼쪽 위
             if(r < y + n && c < x + n) {
@@ -42,6 +40,7 @@ public class Main {
                 y += n;
                 x += n;
             }
+              
         }
         System.out.println(ans);
     }

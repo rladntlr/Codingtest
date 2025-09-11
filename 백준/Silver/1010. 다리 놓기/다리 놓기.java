@@ -3,8 +3,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+// 재귀 호출
 public class Main {
-    static int tc,n,m,ans;
+    static int tc,n,m;
     static int[][] memoi;
 
     public static void main(String[] args) throws Exception {
@@ -16,22 +17,22 @@ public class Main {
             n = Integer.parseInt(st.nextToken());
             m = Integer.parseInt(st.nextToken());
 
-            memoi = new int[m + 1][m + 1];
-            memoi[0][0] = 1;
+            memoi = new int[m + 1][n + 1];
 
-            for(int i = 1; i <= m; i++){
-                for(int j = 0; j <= i; j++){
-                    if(j == 0 || j == i) {
-                        memoi[i][j] = 1;
-                        continue;
-                    }
-                    memoi[i][j] = memoi[i-1][j-1] + memoi[i-1][j];
-                }
-            }
-            System.out.println(memoi[m][n]);
+            System.out.println(combi(m,n));
+
 
         }
 
+    }
+    // nCr
+    static int combi(int n, int r) {
+        if (n == r || r == 0)
+            return memoi[n][r] = 1;
+        if (memoi[n][r] > 0) {
+            return memoi[n][r];
+        }
+        return memoi[n][r] = combi(n - 1, r - 1) + combi(n - 1, r);
     }
 
 }

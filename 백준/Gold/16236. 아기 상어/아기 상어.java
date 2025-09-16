@@ -84,6 +84,8 @@ public class Main {
                     }
                 }
             }
+
+            if (d + 1 >= minDist) continue;
             for (int i = 0; i < 4; i++) {
                 int ny = y + dy[i];
                 int nx = x + dx[i];

@@ -10,14 +10,13 @@ import java.util.StringTokenizer;
 // 두 선거구 모두 선택된 각 구역별로 모두 연결?? 
 //   bfs, dfs
 // 각 구역별 연결 여부 확인 - 인접 행렬
-// bfs
+// dfs
 public class Main {
     static int N, min;
     static boolean[][] matrix; // 가중치가 없는 그래프 연결 
     static int[] population; // 각 구역별 인구수 관리
     static boolean[] select; // 부분집합에서 사용
     static boolean[] visit; // 완탐 재 방문 방지 + 모두 연결되었는지에도 사용
-    static Queue<Integer> queue = new ArrayDeque<>();
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -52,6 +51,14 @@ public class Main {
         if( min == Integer.MAX_VALUE) System.out.println(-1);
         else System.out.println(min);
     }
+    // sel : A 그룹 (true), B 그룹 (false)
+    static void dfs(int v, boolean sel) {
+        visit[v] = true;
+        for (int i = 1; i <= N; i++) {
+            if( ! matrix[v][i] || visit[i] || select[i] != sel ) continue;
+            dfs(i, sel);
+        }
+    }
     // select 배열이 완성(선택,비선택)
     // A, B 두 개로 나누어서 각각 모두 연결되었는지 확인 - bfs
     // 인구수 계산 후 최소값 갱신
@@ -59,48 +66,31 @@ public class Main {
 
         // visit 배열, queue 초기화
         Arrays.fill(visit, false);
-        queue.clear();
 
         // A (select)
+        int a = -1;
         for (int i = 1; i <= N; i++) {
             if( select[i] ) {
-                visit[i] = true;
-                queue.offer(i);
+                a = i;
                 break; // A 선거구에 해당하는 구역 1개만 선택하고 break
             }
         }
 
-        if( queue.size() == 0 ) return;
+        if( a == -1 ) return;
+        dfs( a, true );
 
-        while( ! queue.isEmpty() ) {
-            int v = queue.poll();
-
-            for (int i = 1; i <= N; i++) {
-                if( ! matrix[v][i] || visit[i] || ! select[i] ) continue;
-                visit[i] = true;
-                queue.offer(i);
-            }
-        }
 
         // B (not select)
+        int b = -1;
         for (int i = 1; i <= N; i++) {
             if( ! select[i] ) {
-                visit[i] = true;
-                queue.offer(i);
+                b = i;
                 break; // B 선거구에 해당하는 구역 1개만 선택하고 break
             }
         }
 
-        while( ! queue.isEmpty() ) {
-            int v = queue.poll();
-
-            for (int i = 1; i <= N; i++) {
-                if( ! matrix[v][i] || visit[i] || select[i] ) continue;
-                visit[i] = true;
-                queue.offer(i);
-            }
-        }
-
+        if( b == -1 ) return;
+        dfs( b, false );
 
         // 모두 연결되어 있는지 확인
         // visit 배열

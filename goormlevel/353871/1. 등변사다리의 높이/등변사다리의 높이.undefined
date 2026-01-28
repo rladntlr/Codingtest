@@ -1,0 +1,18 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+        int k = Integer.parseInt(st.nextToken());
+        int d1 = Integer.parseInt(st.nextToken());
+        int d2 = Integer.parseInt(st.nextToken());
+        
+        int diff = d2 - d1;
+        int answer = 4 * k * k - diff * diff;  // 정수만 사용!
+        
+        System.out.println(answer);
+    }
+}

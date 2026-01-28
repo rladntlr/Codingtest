@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+        long am = Long.parseLong(st.nextToken());
+        long cm = Long.parseLong(st.nextToken());
+        long bm = Long.parseLong(st.nextToken());
+        
+        // DM = (AM × BM) / CM
+        long num = am * bm;
+        long den = cm;
+        
+        // 기약분수로 만들기
+        long g = gcd(num, den);
+        System.out.println((num / g) + " " + (den / g));
+    }
+    
+    static long gcd(long a, long b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+}

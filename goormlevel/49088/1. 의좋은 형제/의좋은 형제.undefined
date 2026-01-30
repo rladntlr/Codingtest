@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int a = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
+
+		int date = Integer.parseInt(br.readLine());
+
+		int half = 0;
+		boolean k = true;
+
+		for(int i = 0; i < date; i++){
+			if(k == true){
+				half = a / 2 + a % 2;
+				a = a - half;
+				b = b + half;
+				k = false;
+			}
+			else{
+				half = b / 2 + b % 2;
+				a = a + half;
+				b = b - half;
+				k = true;
+			}
+		}
+		System.out.println(a + " " + b);
+		
+	}
+}

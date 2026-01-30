@@ -1,0 +1,15 @@
+import java.io.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String input = br.readLine().trim();
+        
+        if (input.isEmpty()) {
+            System.out.print(0);
+        } else {
+            String[] word = input.split(" +");
+            System.out.print(word.length);
+        }
+    }
+}

@@ -2,21 +2,15 @@ import java.util.*;
 class Solution {
     public int solution(int[][] dots) {
         
-        double a = dots[0][0] - dots[1][0];
-        double b = dots[0][1] - dots[1][1];
-        double c = dots[2][0] - dots[3][0];
-        double d = dots[2][1] - dots[3][1];
-        if(b/a == d/c) return 1;
-        a=dots[0][0] - dots[2][0];
-        b=dots[0][1] - dots[2][1];
-        c=dots[1][0] - dots[3][0];
-        d=dots[1][1] - dots[3][1];
-        if(b/a == d/c) return 1;
-        a=dots[0][0] - dots[3][0];
-        b=dots[0][1] - dots[3][1];
-        c=dots[1][0] - dots[2][0];
-        d=dots[1][1] - dots[2][1];
-        if(b/a == d/c) return 1;
+        if (parallel(dots, 0, 1, 2, 3)) return 1;
+        if (parallel(dots, 0, 2, 1, 3)) return 1;
+        if (parallel(dots, 0, 3, 1, 2)) return 1;
         return 0;
+    }
+
+    boolean parallel(int[][] dots,int a, int b, int c, int d) {
+        int x = (dots[a][0] - dots[b][0]) * (dots[c][1] - dots[d][1]);
+        int y = (dots[a][1] - dots[b][1]) * (dots[c][0] - dots[d][0]);
+        return x == y;
     }
 }

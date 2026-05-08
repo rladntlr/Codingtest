@@ -1,14 +1,24 @@
 class Solution {
     public int[] findErrorNums(int[] nums) {
-        int[] ans = new int[2];
-        int[] visited = new int[nums.length+1];
-        for(int num: nums){
-            visited[num]++;
+        int n = nums.length;
+        int actualSum = n*(n+1)/2;
+
+        int arraySum = 0;
+        Set<Integer> set = new HashSet<>();
+
+        for(int num : nums){
+            arraySum += num;
+            set.add(num);
         }
-        for(int i = 1; i < visited.length; i++){
-            if(visited[i] == 0) ans[1] = i;
-            if(visited[i] > 1) ans[0] = i;
+
+        int uniqueSum = 0;
+        for(int num : set){
+            uniqueSum += num;
         }
-        return ans;
+        
+        int duplicate = arraySum - uniqueSum;
+        int missing = actualSum - uniqueSum;
+
+        return new int[]{duplicate, missing};
     }
 }

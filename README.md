@@ -5,6 +5,7 @@
 ## Array
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0150-evaluate-reverse-polish-notation](https://github.com/rladntlr/Codingtest/tree/main/0150-evaluate-reverse-polish-notation/) | Medium |
 | [0448-find-all-numbers-disappeared-in-an-array](https://github.com/rladntlr/Codingtest/tree/main/0448-find-all-numbers-disappeared-in-an-array/) | Easy |
 | [0636-exclusive-time-of-functions](https://github.com/rladntlr/Codingtest/tree/main/0636-exclusive-time-of-functions/) | Medium |
 | [0645-set-mismatch](https://github.com/rladntlr/Codingtest/tree/main/0645-set-mismatch/) | Easy |
@@ -34,6 +35,7 @@
 ## Stack
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0150-evaluate-reverse-polish-notation](https://github.com/rladntlr/Codingtest/tree/main/0150-evaluate-reverse-polish-notation/) | Medium |
 | [0636-exclusive-time-of-functions](https://github.com/rladntlr/Codingtest/tree/main/0636-exclusive-time-of-functions/) | Medium |
 | [1441-build-an-array-with-stack-operations](https://github.com/rladntlr/Codingtest/tree/main/1441-build-an-array-with-stack-operations/) | Medium |
 | [1475-final-prices-with-a-special-discount-in-a-shop](https://github.com/rladntlr/Codingtest/tree/main/1475-final-prices-with-a-special-discount-in-a-shop/) | Easy |
@@ -45,4 +47,8 @@
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [1475-final-prices-with-a-special-discount-in-a-shop](https://github.com/rladntlr/Codingtest/tree/main/1475-final-prices-with-a-special-discount-in-a-shop/) | Easy |
+## Math
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0150-evaluate-reverse-polish-notation](https://github.com/rladntlr/Codingtest/tree/main/0150-evaluate-reverse-polish-notation/) | Medium |
 <!---LeetCode Topics End-->

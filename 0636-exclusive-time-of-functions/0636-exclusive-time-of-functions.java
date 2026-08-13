@@ -1,31 +1,37 @@
 class Solution {
     public int[] exclusiveTime(int n, List<String> logs) {
-        int[] answer = new int[n];
-        Deque<Integer> stack = new ArrayDeque<>();
+
+        int[] res = new int[n];
+
+        Deque<Integer> dq = new ArrayDeque<>();
 
         int prevTime = 0;
 
         for (String log : logs) {
-            String[] parts = log.split(":");
 
-            int id = Integer.parseInt(parts[0]);
-            String type = parts[1];
-            int time = Integer.parseInt(parts[2]);
+            int p1 = log.indexOf(':');
+            int p2 = log.indexOf(':', p1 + 1);
 
-            if (type.equals("start")) {
-                if (!stack.isEmpty()) {
-                    answer[stack.peek()] += time - prevTime;
+            int id = Integer.parseInt(log.substring(0, p1));
+            boolean isStart = log.charAt(p1 + 1) == 's';
+            int time = Integer.parseInt(log.substring(p2 + 1));
+
+            if (isStart) {
+
+                if (!dq.isEmpty()) {
+                    res[dq.peek()] += time - prevTime;
                 }
 
-                stack.push(id);
+                dq.push(id);
                 prevTime = time;
 
             } else {
-                answer[stack.pop()] += time - prevTime + 1;
+
+                res[dq.pop()] += time - prevTime + 1;
                 prevTime = time + 1;
             }
         }
 
-        return answer;
+        return res;
     }
 }

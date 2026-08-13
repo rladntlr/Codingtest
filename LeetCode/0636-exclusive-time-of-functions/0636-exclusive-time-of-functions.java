@@ -2,7 +2,9 @@ class Solution {
     public int[] exclusiveTime(int n, List<String> logs) {
 
         int[] res = new int[n];
-        Stack<Integer> st = new Stack<>();
+
+        Deque<Integer> dq = new ArrayDeque<>();
+
         int prevTime = 0;
 
         for (String log : logs) {
@@ -15,17 +17,21 @@ class Solution {
             int time = Integer.parseInt(log.substring(p2 + 1));
 
             if (isStart) {
-                if (!st.isEmpty()) {
-                    res[st.peek()] += time - prevTime;
+
+                if (!dq.isEmpty()) {
+                    res[dq.peek()] += time - prevTime;
                 }
-                st.push(id);
+
+                dq.push(id);
                 prevTime = time;
-            } 
-            else {
-                res[st.pop()] += time - prevTime + 1;
+
+            } else {
+
+                res[dq.pop()] += time - prevTime + 1;
                 prevTime = time + 1;
             }
         }
+
         return res;
     }
 }

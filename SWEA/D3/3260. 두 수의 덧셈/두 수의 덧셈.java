@@ -1,6 +1,6 @@
-
 import java.io.*;
 import java.util.*;
+import java.math.BigInteger;
 
 public class Solution {
 	public static void main(String[] args) throws Exception {
@@ -12,37 +12,11 @@ public class Solution {
 		for(int tc = 1; tc <= T; tc++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 
-			String a = st.nextToken();
-			String b = st.nextToken();
-
-			StringBuilder sum = new StringBuilder();
+			BigInteger A = new BigInteger(st.nextToken());
 			
-			int i = a.length() - 1;
-			int j = b.length() - 1;
+			BigInteger B = new BigInteger(st.nextToken());
 			
-			int carry = 0;
-
-			while (i >= 0 || j >= 0 || carry > 0) {
-				int aa = 0;
-				int bb = 0;
-
-				if (i >= 0) {
-					aa = a.charAt(i) - '0';
-					i--;
-				}
-
-				if (j >= 0) {
-					bb = b.charAt(j) - '0';
-					j--;
-				}
-
-				int value = aa + bb + carry;
-
-				sum.append(value % 10);
-				carry = value / 10;
-			}
-
-			sb.append("#").append(tc).append(" ").append(sum.reverse()).append("\n");
+			sb.append("#").append(tc).append(" ").append(A.add(B)).append("\n");
 		}
 
 		System.out.print(sb);

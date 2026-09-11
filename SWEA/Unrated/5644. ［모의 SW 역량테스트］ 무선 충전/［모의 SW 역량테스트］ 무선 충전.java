@@ -110,76 +110,82 @@ public class Solution {
 
     static int getMaxCharge(int ar, int ac, int br, int bcPos) {
 
-        int max = 0;
+    int max = 0;
 
-        // A가 선택할 BC
-        for (int i = 0; i <= A; i++) {
+    // i : A가 사용할 BC 번호
+    // j : B가 사용할 BC 번호
+    // 마지막 번호(A)는 "아무 BC도 사용하지 않음"
+    for (int i = 0; i <= A; i++) {
+        for (int j = 0; j <= A; j++) {
 
-            // B가 선택할 BC
-            for (int j = 0; j <= A; j++) {
+            int chargeA = 0;
+            int chargeB = 0;
 
-                int chargeA = 0;
-                int chargeB = 0;
+            // --------------------
+            // A의 충전량 구하기
+            // --------------------
 
-                boolean canA = false;
-                boolean canB = false;
+            // i == A 이면 A는 아무 BC도 사용하지 않음
+            if (i != A) {
 
-                // i == A이면 아무 BC도 선택하지 않는 경우
-                if (i == A) {
-                    canA = true;
-                } else {
+                int distanceA =
+                        Math.abs(ar - bc[i][0])
+                        + Math.abs(ac - bc[i][1]);
 
-                    int distanceA =
-                            Math.abs(ar - bc[i][0])
-                            + Math.abs(ac - bc[i][1]);
-
-                    if (distanceA <= bc[i][2]) {
-                        canA = true;
-                        chargeA = bc[i][3];
-                    }
-                }
-
-                // j == A이면 아무 BC도 선택하지 않는 경우
-                if (j == A) {
-                    canB = true;
-                } else {
-
-                    int distanceB =
-                            Math.abs(br - bc[j][0])
-                            + Math.abs(bcPos - bc[j][1]);
-
-                    if (distanceB <= bc[j][2]) {
-                        canB = true;
-                        chargeB = bc[j][3];
-                    }
-                }
-
-                // 둘 중 한 명이라도 해당 BC에 접속 불가능하면
-                // 이 조합은 사용할 수 없음
-                if (!canA || !canB) {
+                // A가 선택한 BC 범위 밖이면
+                // 이 조합은 불가능
+                if (distanceA > bc[i][2]) {
                     continue;
                 }
 
-                int sum;
+                // 범위 안이면 해당 BC의 충전량 저장
+                chargeA = bc[i][3];
+            }
 
-                // 둘 다 같은 BC를 사용하는 경우
-                if (i == j && i != A) {
 
-                    // 같은 BC의 성능을 나눠 가지므로
-                    // 두 사람 충전량의 합은 결국 P
-                    sum = bc[i][3];
+            // --------------------
+            // B의 충전량 구하기
+            // --------------------
 
-                } else {
+            // j == A 이면 B는 아무 BC도 사용하지 않음
+            if (j != A) {
 
-                    // 서로 다른 BC를 사용하거나
-                    // 한 명만 BC를 사용하는 경우
-                    sum = chargeA + chargeB;
+                int distanceB =
+                        Math.abs(br - bc[j][0])
+                        + Math.abs(bcPos - bc[j][1]);
+
+                // B가 선택한 BC 범위 밖이면
+                // 이 조합은 불가능
+                if (distanceB > bc[j][2]) {
+                    continue;
                 }
 
-                max = Math.max(max, sum);
+                // 범위 안이면 해당 BC의 충전량 저장
+                chargeB = bc[j][3];
             }
-        }
 
-        return max;
+
+            int sum;
+
+            // 둘 다 같은 BC를 사용하는 경우
+            if (i == j && i != A) {
+
+                // 같은 BC를 나눠 사용하므로
+                // 둘의 충전량 합은 BC 성능 그대로
+                sum = bc[i][3];
+
+            } else {
+
+                // 서로 다른 BC를 사용하거나
+                // 한 명만 충전하는 경우
+                sum = chargeA + chargeB;
+            }
+
+            // 현재까지 가장 큰 충전량 저장
+            max = Math.max(max, sum);
+        }
     }
+
+    return max;
+}
 }

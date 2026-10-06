@@ -3,53 +3,8 @@ import java.util.*;
 
 public class Solution {
 
-    static class Edge implements Comparable<Edge> {
-        int from, to;
-        long weight;
-
-        Edge(int from, int to, long weight) {
-            this.from = from;
-            this.to = to;
-            this.weight = weight;
-        }
-
-        @Override
-        public int compareTo(Edge o) {
-            return Long.compare(this.weight, o.weight);
-        }
-    }
-
     static int N;
     static long[] x, y;
-    static int[] parents;
-
-    static void makeSet() {
-        parents = new int[N];
-
-        for (int i = 0; i < N; i++) {
-            parents[i] = i;
-        }
-    }
-
-    static int find(int a) {
-        if (a == parents[a]) {
-            return a;
-        }
-
-        return parents[a] = find(parents[a]);
-    }
-
-    static boolean union(int a, int b) {
-        int aRoot = find(a);
-        int bRoot = find(b);
-
-        if (aRoot == bRoot) {
-            return false;
-        }
-
-        parents[bRoot] = aRoot;
-        return true;
-    }
 
     public static void main(String[] args) throws Exception {
 
@@ -79,43 +34,50 @@ public class Solution {
 
             double E = Double.parseDouble(br.readLine());
 
-            Edge[] edges = new Edge[N * (N - 1) / 2];
+            boolean[] visited = new boolean[N];
 
-            int idx = 0;
+            long[] minEdge = new long[N];
 
-            for (int i = 0; i < N; i++) {
-                for (int j = i + 1; j < N; j++) {
+            Arrays.fill(minEdge, Long.MAX_VALUE);
 
-                    long dx = x[i] - x[j];
-                    long dy = y[i] - y[j];
+            minEdge[0] = 0;
+
+            long result = 0;
+
+            for (int c = 0; c < N; c++) {
+
+                int minVertex = -1;
+                long min = Long.MAX_VALUE;
+
+                for (int i = 0; i < N; i++) {
+
+                    if (!visited[i] && minEdge[i] < min) {
+                        min = minEdge[i];
+                        minVertex = i;
+                    }
+                }
+
+                visited[minVertex] = true;
+                result += min;
+
+                for (int i = 0; i < N; i++) {
+
+                    if (visited[i]) {
+                        continue;
+                    }
+
+                    long dx = x[minVertex] - x[i];
+                    long dy = y[minVertex] - y[i];
 
                     long dist = dx * dx + dy * dy;
 
-                    edges[idx++] = new Edge(i, j, dist);
-                }
-            }
-
-            Arrays.sort(edges);
-
-            makeSet();
-
-            long totalDistance = 0;
-            int cnt = 0;
-            
-            for (Edge edge : edges) {
-
-                if (union(edge.from, edge.to)) {
-
-                    totalDistance += edge.weight;
-                    cnt++;
-
-                    if (cnt == N - 1) {
-                        break;
+                    if (dist < minEdge[i]) {
+                        minEdge[i] = dist;
                     }
                 }
             }
 
-            long answer = Math.round(totalDistance * E);
+            long answer = Math.round(result * E);
 
             sb.append("#")
               .append(tc)
